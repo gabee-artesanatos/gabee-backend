@@ -9,15 +9,15 @@ public class ProductMapper {
     }
 
     //DTO de criação -> Entidade
-    public static Product toEntity(ProductDTO obj) {
+    public static Product toEntity(ProductDTO dto) {
 
         Product product = new Product();
 
-        product.setName(obj.name());
-        product.setPrice(obj.price());
-        product.setDescription(obj.description());
-        product.setHeightCm(obj.heightCm());
-        product.setWidthCm(obj.widthCm());
+        product.setName(dto.name());
+        product.setPrice(dto.price());
+        product.setDescription(dto.description());
+        product.setHeightCm(dto.heightCm());
+        product.setWidthCm(dto.widthCm());
 
         return product;
     }
