@@ -34,7 +34,7 @@ public class ProductController {
         return ResponseEntity.status(201).body(response);
     }
 
-    @PostMapping(value = "/restore/{id}")
+    @PostMapping(value = "/{id}/restore")
     public ResponseEntity<Void> restore(@PathVariable Long id) {
         service.restore(id);
         return ResponseEntity.noContent().build();
@@ -46,7 +46,7 @@ public class ProductController {
         return ResponseEntity.ok().body(response);
     }
 
-    @DeleteMapping(value = "/delete/{id}")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
