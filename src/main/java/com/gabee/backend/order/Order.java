@@ -21,7 +21,7 @@ public class Order {
     private OrderStatus status = OrderStatus.PENDING;
 
     @NotNull
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST)
     private List<OrderItem> items = new ArrayList<>();
 
     @NotNull
@@ -34,6 +34,10 @@ public class Order {
 
     public Order(Customer customer) {
         this.customer = customer;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public OrderStatus getStatus() {

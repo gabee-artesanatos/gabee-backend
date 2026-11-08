@@ -1,5 +1,6 @@
 package com.gabee.backend.order;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gabee.backend.exceptions.BusinessRuleException;
 import com.gabee.backend.product.Product;
 import jakarta.persistence.*;
@@ -27,10 +28,12 @@ public class OrderItem {
     @Positive
     private BigDecimal productPrice;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
