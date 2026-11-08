@@ -29,6 +29,9 @@ public class Order {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    @Column(nullable = false)
+    private boolean active = true;
+
     public Order() {
     }
 
@@ -90,6 +93,14 @@ public class Order {
         if (removedItem) {
             item.setOrder(null);
         }
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public void validateStatus(OrderStatus status) {

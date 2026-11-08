@@ -6,6 +6,7 @@ import com.gabee.backend.exceptions.ResourceNotFoundException;
 import com.gabee.backend.order.dto.OrderDTO;
 import com.gabee.backend.order.dto.OrderItemDTO;
 import com.gabee.backend.order.dto.OrderResponseDTO;
+import com.gabee.backend.order.dto.OrderUpdateDTO;
 import com.gabee.backend.product.Product;
 import com.gabee.backend.product.ProductRepository;
 import jakarta.transaction.Transactional;
@@ -64,5 +65,32 @@ public class OrderService {
         repository.save(order);
 
         return OrderMapper.toResponseDTO(order);
+    }
+
+    public OrderResponseDTO update(Long id, OrderUpdateDTO obj) {
+        Order order = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(id));
+
+        order.setStatus(obj.status());
+
+        return OrderMapper.toResponseDTO(order);
+    }
+
+    public void delete(Long id) {
+        Order deletedOrder = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(id));
+
+        deletedOrder.setActive(false);
+
+        repository.save(deletedOrder);
+    }
+
+    public void restore(Long id) {
+        Order restoredOrder = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(id));
+
+        restoredOrder.setActive(true);
+
+        repository.save(restoredOrder);
     }
 }
