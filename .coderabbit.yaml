@@ -1,0 +1,9 @@
+language: pt-BR
+
+reviews:
+  profile: chill
+
+  auto_review:
+    enabled: true
+    drafts: false
+    auto_incremental_review: true
