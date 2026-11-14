@@ -3,7 +3,78 @@ language: pt-BR
 reviews:
   profile: chill
 
+  review_progress: true
+  fail_commit_status: true
+
   auto_review:
     enabled: true
     drafts: false
     auto_incremental_review: true
+
+  auto_approvals:
+    enabled: false
+
+  path_instructions:
+    - path: "src/main/java/**/*.java"
+      instructions: |
+        Atue como revisor sênior de Java, Spring Boot,
+        JPA/Hibernate e engenharia de software.
+
+        Classifique cada problema conforme sua gravidade:
+
+        IMPEDITIVO (Critical ou Major):
+        - Bugs demonstráveis que comprometam funcionalidades.
+        - Violações de regras de negócio confirmadas.
+        - Riscos concretos de perda ou corrupção de dados.
+        - Vulnerabilidades de segurança relevantes.
+        - Falhas de persistência, transações ou relacionamentos.
+        - Alterações que quebrem contratos existentes.
+
+        AVISO (Minor, Trivial ou Info):
+        - Melhorias de legibilidade e organização.
+        - Refatorações opcionais.
+        - Preferências de estilo ou sintaxe.
+        - Possíveis otimizações sem impacto relevante.
+        - Sugestões de simplificação de código.
+
+        Exemplo:
+        Substituir um for tradicional por um for-each
+        é uma melhoria opcional, não um bug, desde que
+        o comportamento seja equivalente.
+
+        Para cada problema impeditivo:
+        - Explique a causa e a consequência concreta.
+        - Indique como reproduzir ou verificar.
+        - Não classifique hipóteses como bugs confirmados.
+
+        Para melhorias:
+        - Identifique como sugestão não bloqueante.
+        - Explique o benefício e o trade-off.
+        - Não exija alterações cosméticas.
+
+        Priorize simplicidade, encapsulamento,
+        consistência e preservação das regras de negócio.
+
+        Responda em português brasileiro.
+
+    - path: "src/main/resources/db/migration/**"
+      instructions: |
+        Revise migrations Flyway e PostgreSQL.
+
+        IMPEDITIVO (Critical ou Major):
+        - SQL inválido que impeça a migration.
+        - Perda ou corrupção de dados não planejada.
+        - Incompatibilidade entre schema e entidades.
+        - Violação de chaves estrangeiras ou constraints.
+        - Alterações destrutivas sem justificativa.
+
+        AVISO (Minor, Trivial ou Info):
+        - Melhorias opcionais em índices.
+        - Ajustes de nomenclatura.
+        - Refatorações sem impacto funcional.
+
+        Não recomende reescrever migrations já
+        executadas em ambientes compartilhados.
+
+        Explique a consequência de cada problema.
+        Responda em português brasileiro.
