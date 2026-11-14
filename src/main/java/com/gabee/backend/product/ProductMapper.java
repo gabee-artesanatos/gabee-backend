@@ -18,6 +18,8 @@ public class ProductMapper {
         product.setDescription(dto.description());
         product.setHeightCm(dto.heightCm());
         product.setWidthCm(dto.widthCm());
+        product.setQuantityPhotos(dto.quantityPhotos());
+        product.setMagnet(dto.magnet());
 
         return product;
     }
@@ -31,6 +33,8 @@ public class ProductMapper {
                 product.getDescription(),
                 product.getHeightCm(),
                 product.getWidthCm(),
+                product.getQuantityPhotos(),
+                product.isMagnet(),
                 product.isActive()
         );
     }
@@ -42,5 +46,7 @@ public class ProductMapper {
         product.setDescription(updateProduct.description());
         product.setHeightCm(updateProduct.heightCm());
         product.setWidthCm(updateProduct.widthCm());
+        product.setQuantityPhotos(updateProduct.quantityPhotos());
+        product.setMagnet(updateProduct.magnet());
     }
 }

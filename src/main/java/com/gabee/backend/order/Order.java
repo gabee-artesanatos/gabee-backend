@@ -4,13 +4,16 @@ import com.gabee.backend.customer.Customer;
 import com.gabee.backend.exceptions.BusinessRuleException;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Entity
 @Table(name = "orders")
+@Getter
+@NoArgsConstructor
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,31 +35,12 @@ public class Order {
     @Column(nullable = false)
     private boolean active = true;
 
-    public Order() {
-    }
-
     public Order(Customer customer) {
         this.customer = customer;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public OrderStatus getStatus() {
-        return status;
-    }
-
     public void setStatus(OrderStatus status) {
         this.status = status;
-    }
-
-    public List<OrderItem> getItems() {
-        return items;
-    }
-
-    public Customer getCustomer() {
-        return customer;
     }
 
     public void addItem(OrderItem item) {
@@ -66,19 +50,23 @@ public class Order {
             throw new BusinessRuleException("Verifique os itens e quantidades do pedido e tente novamente!");
         }
 
-        Optional<OrderItem> existingOrderItem = items.stream()
-                .filter(i -> i.getProduct().getId().equals(item.getProduct().getId()))
-                .findFirst();
+        items.add(item);
+        item.setOrder(this);
 
-        existingOrderItem.ifPresentOrElse(
-                i -> i.sumItem(item.getQuantity()),
-                () -> {
-                    if (item.getQuantity() > 0) {
-                        items.add(item);
-                        item.setOrder(this);
-                    }
-                }
-        );
+//        TODO: Agrupamento de itens do pedido, verificar se vai considerar personalização ou não, no momento não considera
+//        Optional<OrderItem> existingOrderItem = items.stream()
+//                .filter(orderItem -> orderItem.getProduct().getId().equals(item.getProduct().getId()))
+//                .findFirst();
+//
+//        existingOrderItem.ifPresentOrElse(
+//                orderItem -> orderItem.sumItem(item.getQuantity()),
+//                () -> {
+//                    if (item.getQuantity() > 0) {
+//                        items.add(item);
+//                        item.setOrder(this);
+//                    }
+//                }
+//        );
     }
 
     public void removeItem(OrderItem item) {
@@ -93,10 +81,6 @@ public class Order {
         if (removedItem) {
             item.setOrder(null);
         }
-    }
-
-    public boolean isActive() {
-        return active;
     }
 
     public void setActive(boolean active) {

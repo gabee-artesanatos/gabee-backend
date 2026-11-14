@@ -9,5 +9,7 @@ public record ProductResponseDTO(
         String description,
         BigDecimal heightCm,
         BigDecimal widthCm,
+        Integer quantityPhotos,
+        boolean magnet,
         boolean active) {
 }
