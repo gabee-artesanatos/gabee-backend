@@ -5,15 +5,17 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "products")
-@Getter
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,40 +49,4 @@ public class Product {
 
     @Column(nullable = false)
     private boolean active = true;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setHeightCm(BigDecimal heightCm) {
-        this.heightCm = heightCm;
-    }
-
-    public void setWidthCm(BigDecimal widthCm) {
-        this.widthCm = widthCm;
-    }
-
-    public void setQuantityPhotos(Integer quantityPhotos) {
-        this.quantityPhotos = quantityPhotos;
-    }
-
-    public void setMagnet(boolean magnet) {
-        this.magnet = magnet;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
 }

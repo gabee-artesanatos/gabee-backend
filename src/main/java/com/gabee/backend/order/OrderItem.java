@@ -8,7 +8,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
@@ -17,8 +18,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "order_items")
+@Data
 @NoArgsConstructor
-@Getter
+@AllArgsConstructor
 public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -70,24 +72,12 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public void setProductPrice(BigDecimal productPrice) {
-        this.productPrice = productPrice;
-    }
-
     public void setProduct(Product product) {
         if (product == null) {
             throw new BusinessRuleException("Informe um produto válido!");
         }
 
         this.product = product;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
     }
 
     public void sumItem(int quantity) {

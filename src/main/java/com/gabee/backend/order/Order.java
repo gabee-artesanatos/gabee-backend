@@ -4,7 +4,8 @@ import com.gabee.backend.customer.Customer;
 import com.gabee.backend.exceptions.BusinessRuleException;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
@@ -12,8 +13,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "orders")
-@Getter
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,10 +39,6 @@ public class Order {
 
     public Order(Customer customer) {
         this.customer = customer;
-    }
-
-    public void setStatus(OrderStatus status) {
-        this.status = status;
     }
 
     public void addItem(OrderItem item) {
@@ -81,10 +79,6 @@ public class Order {
         if (removedItem) {
             item.setOrder(null);
         }
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 
     public void validateStatus(OrderStatus status) {

@@ -50,7 +50,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderResponseDTO insert(@NonNull OrderDTO obj) {
         Customer customer = customerService.findCustomerById(obj.customerId());
 
-        Order order = new Order(customer);
+        Order order = new Order();
 
         for (OrderItemDTO orderItem : obj.items()) {
             Long productId = orderItem.productId();
@@ -70,6 +70,8 @@ public class OrderServiceImpl implements OrderService {
 
             order.addItem(savedItem);
         }
+
+        order.setCustomer(customer);
 
         repository.save(order);
 
